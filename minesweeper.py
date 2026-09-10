@@ -2,6 +2,12 @@ import pygame
 import minesweeper_module as ms
 import numpy as np
 import math
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+def load_image(name):
+  path = os.path.join(BASE_DIR,'Images',name)
+  return pygame.image.load(path)
 
 gridSizeX = 22
 gridSizeY = 12
@@ -17,15 +23,15 @@ running = True
 
 backColor = (48,48,48)
 
-tile_image = pygame.image.load('minesweeper-tile.png').convert()
+tile_image = load_image('minesweeper-tile.png').convert()
 tile_image = pygame.transform.scale(tile_image,(cellSize,cellSize))
-tile_dark_image = pygame.image.load('minesweeper-tile-dark.png').convert()
+tile_dark_image = load_image('minesweeper-tile-dark.png').convert()
 tile_dark_image = pygame.transform.scale(tile_dark_image,(cellSize+cellBorderWidth,cellSize+cellBorderWidth))
 
-flag_dark_image = pygame.image.load('minesweeper-flag-dark.png').convert()
+flag_dark_image = load_image('minesweeper-flag-dark.png').convert()
 flag_dark_image = pygame.transform.scale(flag_dark_image,(cellSize+cellBorderWidth,cellSize+cellBorderWidth))
 
-mine_image = pygame.image.load('minesweeper-mine.png').convert_alpha()
+mine_image = load_image('minesweeper-mine.png').convert_alpha()
 mine_image = pygame.transform.scale(mine_image,(cellSize,cellSize))
 
 backTileGrid = [pygame.Rect(x,y,cellSize,cellSize) for x in range(cellBorderWidth,(cellSize+cellBorderWidth) * gridSizeX,cellSize+cellBorderWidth) for y in range(cellBorderWidth,(cellSize+cellBorderWidth) * gridSizeY,cellSize+cellBorderWidth)]
@@ -33,7 +39,7 @@ backTileColor = (70,70,70)
 
 numImages = []
 for i in range(8):
-  numImg = pygame.image.load(f'minesweeper-{i+1}.png').convert_alpha()
+  numImg = load_image(f'minesweeper-{i+1}.png').convert_alpha()
   numImg = pygame.transform.scale(numImg,(cellSize,cellSize))
   numImages.append(numImg)
 
